@@ -19,7 +19,7 @@ export const getUser = async (req: Request, res: Response) => {
         const user = await User.findById(userId)
 
         if (!user) {
-            res.status(400).json({ message: "User not found" })
+            return res.status(400).json({ message: "User not found" })
         }
 
         res.status(200).json(user)
@@ -52,7 +52,7 @@ export const updateUser = async (req: Request, res: Response) => {
         const user = await User.findByIdAndUpdate(userId, userUpdated, { new: true })
 
         if (!user) {
-            res.status(400).json({ message: "User not found" })
+            return res.status(400).json({ message: "User not found" })
         }
 
         res.status(200).json(user)
@@ -66,7 +66,7 @@ export const deleteUser = async (req: Request, res: Response) => {
         const user = await User.findByIdAndDelete(userId)
 
         if (!user) {
-            res.status(400).json({ message: "User not found" })
+            return res.status(400).json({ message: "User not found" })
         }
 
         res.status(200).json({ message: "User deleted" })
@@ -79,7 +79,7 @@ export const deleteUserAll = async (req: Request, res: Response) => {
         const user = await User.deleteMany()
 
         if (!user) {
-            res.status(400).json({ message: "Users not found" })
+            return res.status(400).json({ message: "Users not found" })
         }
 
         res.status(200).json({ message: "Users  deleted" })

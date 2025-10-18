@@ -10,7 +10,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-    
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -35,6 +35,13 @@ const Login = () => {
                 body: JSON.stringify(formData)
             });
 
+            // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(formData)
+            // });
+
+
             const data = await response.json();
 
             if (!response.ok) {
@@ -42,12 +49,12 @@ const Login = () => {
             }
 
             setSuccessMessage('Login realizado com sucesso! Redirecionando...');
-            
+
             localStorage.setItem('token', data.token || '');
             localStorage.setItem('username', data.user?.username || 'Usuário');
-            
+
             setTimeout(() => {
-                navigate('/main', { 
+                navigate('/main', {
                     replace: true,
                     state: { fromLogin: true }
                 });
@@ -66,14 +73,14 @@ const Login = () => {
                 <div className="auth-text">Login</div>
                 <div className="auth-underline"></div>
             </div>
-            
+
             {error && <div className="error-message">{error}</div>}
             {successMessage && <div className="success-message login-success">{successMessage}</div>}
-            
+
             <form className="auth-inputs" onSubmit={handleSubmit}>
                 <div className="auth-input">
-                    <input 
-                        type="email" 
+                    <input
+                        type="email"
                         name="email"
                         placeholder='Email'
                         value={formData.email}
@@ -82,31 +89,31 @@ const Login = () => {
                     />
                 </div>
                 <div className="auth-input">
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         name="password"
-                        placeholder='Password' 
+                        placeholder='Password'
                         value={formData.password}
                         onChange={handleChange}
                         required
                         minLength="6"
                     />
                 </div>
-                
+
                 <div className="forgot-password">
-                    Esqueceu a senha? 
+                    Esqueceu a senha?
                     {/* <Link to="/register">Clique aqui!</Link> */}
                 </div>
-                
-                <button 
-                    type="submit" 
+
+                <button
+                    type="submit"
                     className="auth-submit-button"
                     disabled={loading}
                 >
                     {loading ? 'Processando...' : 'Login'}
                 </button>
             </form>
-            
+
             <div className="auth-switch">
                 Não tem uma conta? <Link to="/register">Cadastre-se aqui</Link>
             </div>

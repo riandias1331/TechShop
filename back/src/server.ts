@@ -7,15 +7,16 @@ import routes from "./routes/routes"
 import cors from "cors"
 import errorHandler from './middlewares/errorHandler'
 
+// Config
 dotenv.config()
 const app: Express = express()
-const port: string | number = process.env.PORT || 5000
+const port: string | number = process.env.PORT || 8080
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5174',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
