@@ -3,8 +3,18 @@
 
 //Docker
 
+# PASSO 1: Construir as imagens
+docker compose build
+
+# PASSO 2: Executar os containers
+docker compose up
+
+# OU em uma linha só (faz build + up):
+docker compose up --build
+
+
 criar dockerfile no back e outro front
-docker compose -build
+docker compose build
 
 
 alteraçoes: 
@@ -31,6 +41,23 @@ docker tag 07e7bb79dbb9 riandias/projectfull-backend:1.0
 docker push riandias/projectfull-frontend:1.0
 docker push riandias/projectfull-backend:1.0
 
+
+--
+# Renomeie as imagens locais para SEU repositório no Docker Hub
+docker tag techshop-frontend:latest riandias/techshop:frontend-1.0
+docker tag techshop-backend:latest riandias/techshop:backend-1.0
+# Envie as duas imagens para o Docker Hub
+docker push riandias/techshop:frontend-1.0
+docker push riandias/techshop:backend-1.0
+
+# Taggear + push em sequência
+docker tag techshop-frontend:latest riandias/techshop:frontend-1.0 && \
+docker tag techshop-backend:latest riandias/techshop:backend-1.0 && \
+docker push riandias/techshop:frontend-1.0 && \
+docker push riandias/techshop:backend-1.0
+# Veja suas imagens renomeadas
+docker images | grep riandias/techshop   - linux
+docker images | Select-String "riandias"  - windows
 
 Agora qualquer máquina com Docker pode baixar suas imagens:
 
