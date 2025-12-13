@@ -1,4 +1,4 @@
-# 🚀 Projeto Full Stack com Node.js, TypeScript, Prisma e Docker: Basic E-commerce 
+# 🚀 Projeto Full Stack com Node.js, TypeScript, Prisma e Docker: Basic E-commerce  TechShop
 
 Este é um projeto em desenvolvimento que integra **Node.js**, **TypeScript**, **PostgreSQL**, **MongoDB**, **JWT** para autenticação e **Prisma** como ORM.  
 Toda a aplicação roda em containers utilizando **Docker**, garantindo facilidade no setup e portabilidade.  
