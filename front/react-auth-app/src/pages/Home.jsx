@@ -17,6 +17,17 @@ export default function Home() {
                 Criar Conta
               </Link>
             </div>
+             {/* 🔐 LOGIN COM GOOGLE */}
+            <div className="social-login">
+              <button
+                onClick={handleGoogleLogin}
+                className="home-button google"
+              >
+                Entrar com Google
+              </button>
+            </div>
+
+
             <div className="forgot-password">
               Esqueceu sua senha? <Link to="/recovery">Recuperar acesso</Link>
             </div>

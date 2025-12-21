@@ -315,3 +315,13 @@ bash
 docker logs nome-do-container
 # Ver erro específico
 ✅ CHECKLIST FINAL
+
+
+
+
+
+##
+
+
+# Reconectar
+ssh -i "pass-gen-ec2.pem" ubuntu@ec2-3-14-8-253.us-east-2.compute.amazonaws.com
