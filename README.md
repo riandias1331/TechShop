@@ -16,7 +16,7 @@ Em breve, será adicionada a integração com **AWS** para deploy em nuvem. ☁�
 - **Prisma ORM** → Modelagem e acesso a dados  
 - **JWT (JSON Web Token)** → Autenticação e segurança  
 - **Docker & Docker Compose** → Ambientes isolados e consistentes  
-- **AWS (futuro)** → Deploy em nuvem  
+- **Google cloud** → Deploy em nuvem  
 
 ---
 
