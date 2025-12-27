@@ -27,7 +27,9 @@
   display: flex;
   gap: 15px;
   justify-content: center;
+  align-items: center; /* Adicionado para alinhamento vertical */
   margin-bottom: 30px;
+  flex-wrap: wrap; /* Para responsividade em telas menores */
 }
 
 .home-button {
@@ -36,6 +38,13 @@
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  display: inline-flex; /* Alterado de padrão para inline-flex */
+  align-items: center;
+  justify-content: center;
+  min-height: 44px; /* Altura consistente para todos os botões */
+  border: none; /* Remove bordas padrão */
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .home-button.primary {
@@ -46,6 +55,7 @@
 .home-button.primary:hover {
   background-color: #5a7dfa;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 142, 251, 0.3);
 }
 
 .home-button.secondary {
@@ -57,10 +67,31 @@
 .home-button.secondary:hover {
   background-color: #f0f3ff;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 142, 251, 0.2);
+}
+
+/* Botão GitHub - CORRIGIDO */
+.home-button.github {
+  background-color: #24292e;
+  color: white;
+  display: inline-flex; /* Garantido */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 25px; /* Padding consistente */
+  border-radius: 6px; /* Border-radius consistente */
+  border: none; /* Remove qualquer borda */
+}
+
+.home-button.github:hover {
+  background-color: #1a1e22;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(36, 41, 46, 0.3);
 }
 
 .forgot-password {
   color: #666;
+  margin-top: 20px;
 }
 
 .forgot-password a {
@@ -70,4 +101,46 @@
 
 .forgot-password a:hover {
   text-decoration: underline;
+}
+
+/* Para ícones dentro dos botões */
+.home-button i,
+.home-button svg {
+  font-size: 1.2em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .home-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .home-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .home-content h1 {
+    font-size: 2rem;
+  }
+  
+  .home-content p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    min-height: 60vh;
+    padding: 15px;
+  }
+  
+  .home-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .home-content p {
+    font-size: 1rem;
+  }
 }
