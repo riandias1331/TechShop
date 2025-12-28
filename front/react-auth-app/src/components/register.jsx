@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Auth.css';
 
+
 const Register = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -35,7 +36,7 @@ const Register = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/register', {
+            const response = await fetch("http://localhost:4000/api/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
