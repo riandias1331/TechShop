@@ -54,7 +54,7 @@ app.get('/test-error-pg', async(req, res) => {
 
 // Server
 app.on("DataBase", () => {
-    app.listen(port, () => {
+    app.listen(port, "0.0.0.0", () => {
         console.log(`Server is running in localhost:${port}`)
     })
 })
