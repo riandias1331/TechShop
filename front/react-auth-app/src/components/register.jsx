@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './Auth.css';
-
+import './auth.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -36,7 +35,12 @@ const Register = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:4000/api/register", {
+            // ANTES (código fixo):
+            // const response = await fetch("http://localhost:4000/api/register", {
+            
+            // DEPOIS (usando .env):
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+            const response = await fetch(`${API_URL}/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './Auth.css';
+import './auth.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -27,20 +27,21 @@ const Login = () => {
         setError('');
 
         try {
-            const response = await fetch("http://localhost:4000/api/login", {
+            // ANTES (código fixo):
+            // const response = await fetch("http://localhost:4000/api/login", {
+            
+            // ANTES (Create React App - não funciona no Vite):
+            // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+            
+            // DEPOIS (usando .env com Vite):
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+            const response = await fetch(`${API_URL}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData)
             });
-
-            // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData)
-            // });
-
 
             const data = await response.json();
 
@@ -102,7 +103,6 @@ const Login = () => {
 
                 <div className="forgot-password">
                     Esqueceu a senha?
-                    {/* <Link to="/register">Clique aqui!</Link> */}
                 </div>
 
                 <button
