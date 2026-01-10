@@ -117,24 +117,6 @@ export const register = async (req: Request, res: Response) => {
     }
 }
 
-// export const login = async (req: Request, res: Response) => {
-//     try {
-//         const { email, password } = req.body as { email: string, password: string }
-
-//         const user = await User.findOne({ email });
-//         if (!user) {
-//             console.log('Invalid email ')
-//             return res.status(400).json({ error: 'User not found' });
-//         }
-
-//         console.log('Login successfully:', user);
-//         res.status(200).json({ message: 'Login successfully', user });
-
-//     } catch (error) {
-//         res.status(400).json({ message: (error as Error).message })
-//     }
-// }
-
 
 export const login = async (req: Request, res: Response) => {
   try {
