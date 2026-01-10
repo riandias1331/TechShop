@@ -12,7 +12,14 @@ docker compose up
 # OU em uma linha só (faz build + up):
 docker compose up --build
 
+## Rodar
+docker compose down -v
+docker compose up --build
 
+
+---
+
+##
 criar dockerfile no back e outro front
 docker compose build
 

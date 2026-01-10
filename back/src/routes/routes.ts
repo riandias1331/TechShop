@@ -11,7 +11,7 @@ import validateUser from '../utils/validator'
   //Private Routes
   route.get('/mongo', auth.authMiddleware, userControllerMongo.getUserAll)
   route.get('/mongo/:id', auth.authMiddleware, userControllerMongo.getUser)
-  route.put('/mongo', auth.authMiddleware, validateUser, userControllerMongo.updateUser)
+  route.put('/mongo/:id', auth.authMiddleware, validateUser, userControllerMongo.updateUser)
   route.delete('/mongo/:id', auth.authMiddleware, userControllerMongo.deleteUser)
   route.delete('/mongo', auth.authMiddleware, userControllerMongo.deleteUserAll)
 
@@ -25,7 +25,7 @@ import validateUser from '../utils/validator'
   //Private
   route.get("/postgres", auth.authMiddleware, userControllerPostgres.getAllUsers)
   route.get("/postgres/:id", auth.authMiddleware, userControllerPostgres.getUserById)
-  route.put("/postgres", auth.authMiddleware, validateUser, userControllerPostgres.updateUser)
+  route.put("/postgres/:id", auth.authMiddleware, validateUser, userControllerPostgres.updateUser)
   route.delete("/postgres", auth.authMiddleware, userControllerPostgres.deleteAll)
   route.delete("/postgres/:id", auth.authMiddleware, userControllerPostgres.deleteUser)
   

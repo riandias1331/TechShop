@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = exports.deleteUserAll = exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser = exports.getUserAll = void 0;
 const model_mongo_1 = __importDefault(require("../models/model.mongo"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const getUserAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield model_mongo_1.default.find();
@@ -120,16 +121,45 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.register = register;
+// export const login = async (req: Request, res: Response) => {
+//     try {
+//         const { email, password } = req.body as { email: string, password: string }
+//         const user = await User.findOne({ email });
+//         if (!user) {
+//             console.log('Invalid email ')
+//             return res.status(400).json({ error: 'User not found' });
+//         }
+//         console.log('Login successfully:', user);
+//         res.status(200).json({ message: 'Login successfully', user });
+//     } catch (error) {
+//         res.status(400).json({ message: (error as Error).message })
+//     }
+// }
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
         const user = yield model_mongo_1.default.findOne({ email });
         if (!user) {
-            console.log('Invalid email ');
-            return res.status(400).json({ error: 'User not found' });
+            return res.status(400).json({ error: 'Usuário não encontrado' });
         }
-        console.log('Login successfully:', user);
-        res.status(200).json({ message: 'Login successfully', user });
+        // Verifica a senha (você precisa adicionar bcrypt.compare)
+        const isPasswordValid = yield bcrypt_1.default.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ error: 'Senha incorreta' });
+        }
+        // GERA O TOKEN JWT (você não está fazendo isso atualmente!)
+        const token = jsonwebtoken_1.default.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        console.log('Login successfully:', user.email);
+        // RETORNA O TOKEN PARA O FRONTEND
+        res.status(200).json({
+            message: 'Login realizado com sucesso',
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
     }
     catch (error) {
         res.status(400).json({ message: error.message });

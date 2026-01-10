@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import User, { IUser } from '../models/model.mongo'
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 
 
@@ -116,20 +117,61 @@ export const register = async (req: Request, res: Response) => {
     }
 }
 
+// export const login = async (req: Request, res: Response) => {
+//     try {
+//         const { email, password } = req.body as { email: string, password: string }
+
+//         const user = await User.findOne({ email });
+//         if (!user) {
+//             console.log('Invalid email ')
+//             return res.status(400).json({ error: 'User not found' });
+//         }
+
+//         console.log('Login successfully:', user);
+//         res.status(200).json({ message: 'Login successfully', user });
+
+//     } catch (error) {
+//         res.status(400).json({ message: (error as Error).message })
+//     }
+// }
+
+
 export const login = async (req: Request, res: Response) => {
-    try {
-        const { email, password } = req.body as { email: string, password: string }
+  try {
+    const { email, password } = req.body as { email: string, password: string }
 
-        const user = await User.findOne({ email });
-        if (!user) {
-            console.log('Invalid email ')
-            return res.status(400).json({ error: 'User not found' });
-        }
-
-        console.log('Login successfully:', user);
-        res.status(200).json({ message: 'Login successfully', user });
-
-    } catch (error) {
-        res.status(400).json({ message: (error as Error).message })
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: 'Usuário não encontrado' });
     }
+
+    // Verifica a senha (você precisa adicionar bcrypt.compare)
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ error: 'Senha incorreta' });
+    }
+
+    // GERA O TOKEN JWT (você não está fazendo isso atualmente!)
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET as string,
+      { expiresIn: '24h' }
+    );
+
+    console.log('Login successfully:', user.email);
+    
+    // RETORNA O TOKEN PARA O FRONTEND
+    res.status(200).json({ 
+      message: 'Login realizado com sucesso', 
+      token, 
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email
+      }
+    });
+
+  } catch (error) {
+    res.status(400).json({ message: (error as Error).message })
+  }
 }

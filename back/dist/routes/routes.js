@@ -46,7 +46,7 @@ const validator_1 = __importDefault(require("../utils/validator"));
 //Private Routes
 route.get('/mongo', auth.authMiddleware, userControllerMongo.getUserAll);
 route.get('/mongo/:id', auth.authMiddleware, userControllerMongo.getUser);
-route.put('/mongo', auth.authMiddleware, validator_1.default, userControllerMongo.updateUser);
+route.put('/mongo/:id', auth.authMiddleware, validator_1.default, userControllerMongo.updateUser);
 route.delete('/mongo/:id', auth.authMiddleware, userControllerMongo.deleteUser);
 route.delete('/mongo', auth.authMiddleware, userControllerMongo.deleteUserAll);
 //Public Routes
@@ -57,7 +57,7 @@ route.post('/api/login', userControllerMongo.login);
 //Private
 route.get("/postgres", auth.authMiddleware, userControllerPostgres.getAllUsers);
 route.get("/postgres/:id", auth.authMiddleware, userControllerPostgres.getUserById);
-route.put("/postgres", auth.authMiddleware, validator_1.default, userControllerPostgres.updateUser);
+route.put("/postgres/:id", auth.authMiddleware, validator_1.default, userControllerPostgres.updateUser);
 route.delete("/postgres", auth.authMiddleware, userControllerPostgres.deleteAll);
 route.delete("/postgres/:id", auth.authMiddleware, userControllerPostgres.deleteUser);
 //Public
