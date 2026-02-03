@@ -133,7 +133,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Senha incorreta' });
     }
 
-    // GERA O TOKEN JWT (você não está fazendo isso atualmente!)
+    // GERA O TOKEN JWT 
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET as string,
